@@ -1,0 +1,67 @@
+---
+title: "Fishers' access to fish and mental health"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Introduction
+
+What is the relationship between fishers’ access to fish and their mental wellbeing
+
+Descriptive paper
+
+Discussion of pathways, but maybe we don’t disentangle them fully
+
+Directions for future research
+
+Following King et al methodology
+
+
+
+### Background
+
+What do we know about natural resource access and mental health?
+
+What are potential pathways that have been explored?
+
+How might natural resource access impact mental health via 
+
+Context: What drives fish access on Mfangano? 
+
+Context: What do we know about fishing on Mfangano?
+
+
+
+### Data and Methodology
+
+Structure and purpose of survey
+
+Outcome variable(s)—describe and summarize
+
+Key predictor variable(s)—describe and summarize
+
+Key covariates—describe and summarize
+
+Data we can use to isolate potential pathways (e.g. income), if we can
+
+Models used
+
+Claims and shortcomings of modeling approach
+
+
+### Results
+
+
+
+### Conclusions
+
+Directions for future research
+
+Link to climate change and changing resource base, livelihoods
+
+Mention governance regimes that impact resource access?
+
