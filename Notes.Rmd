@@ -1,0 +1,42 @@
+---
+title: "Notes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Mfangano Data
+
+
+
+
+## King et al 2021 Methods
+
+*No regression used at all.* Does not have a broad set of fisher characteristics to use as controls. Unable to assess whether the differences are due to selection into different categories (e.g. skipper vs crew or inshore vs offshore) or reverse causality, versus a causal effect. (They don't claim anything causal)
+
+Uses qualitative coding, PCA and tests of differences among groups. 
+
+What is prevalence of psychological distress among fisher respondents?
+
+* calculated prevalence and compard to nationally representative statistics
+
+What are the primary perceived stressors experienced by fisher respondents?
+
+* used PCA to reduce stressors into 3 categories
+
+Do perceived stressors differ between inshore/offshore and skippers/crew?
+
+* used t-tests on principle components scores
+
+Are there differences in K10 status between inshore/offshore and skippers/crew? 
+
+* used chi-square tests
+
+Does perception of stressors vary in relation to K10 scores? 
+
+* oneway ANOVA
+
+*No regression used at all!*
+
