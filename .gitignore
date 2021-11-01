@@ -1,7 +1,13 @@
+
+# R background files
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 
+# word docs
+.docx
+
+# data and literature
 /data
 /lit 
