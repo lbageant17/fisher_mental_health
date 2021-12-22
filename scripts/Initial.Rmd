@@ -1,0 +1,184 @@
+---
+title: "Initial Data Exploration"
+author: "Liz Bageant"
+date: "12/22/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "hide")
+```
+
+This is the first initial exploration of the Mfangano data for the fisher mental health paper. Will keep notes simple for now. 
+
+```{r , echo = FALSE, include = FALSE}
+#install.packages("tidyverse")
+#install.packages("skimr")
+
+library(tidyverse) 
+library(skimr)
+
+```
+
+Make folder paths
+
+```{r}
+projectFolder  <- "~/github/fisher_mental_health"
+data <- file.path(projectFolder, "data/csv")
+```
+
+Bring in fish access file and morbidity fileS
+
+```{r}
+access <- read.csv(file.path(data, "tbl_I_FisheryAccess.csv"), na.strings=c("", "NA"))
+morbidity <- read.csv(file.path(data, "tbl_L_Morbidity.csv"))
+```
+
+**ORGANIZE AND EXPLORE FISHING ACCESS QUESTIONS**
+
+There is a skip pattern in the questionnaire. 
+"Access Limitations" questions differ slightly between fisher and non-fishers 
+depending on whether they answer yes or no to I1: *"Have you fished or hired labor to fish in the last 3 months"*. 
+If "no", answer questions in I2. If yes, answer questions in I3. 
+
+
+Create a dataset for fishing behavior and motivation for **those who did not fish** in the past 3 months
+
+Note: Variable names have suffix that represents their question number in first follow-up survey located at: Survey Instruments and Instructions/Questionnaires-03 Month Follow-Up. 
+e.g. Module I, question 3.1 --> i31. 
+
+```{r}
+fishing_behavior_nf <- access %>% 
+  mutate(fished_or_hired_3months_i1 = as.numeric(I1_FishedOrHiredLaborLastThreeMosYN),
+         hired_ever_i21 = as.numeric(I21_HireLabor),
+         leased_ever_i21 = as.numeric(I21_GoFishingUnderLease),
+         self_ever_i21 = as.numeric(I21_GoFishingSelfEmployed),
+         forpay_ever_i21 = as.numeric(I21_WorkAsHiredLabor),
+         last_fished_i22 = as.character(I22_LastTimeFished), 
+         stop_reason_i231 = as.character(I231_ReasonsStoppedFishing), 
+         stop_reason_important_i232 = as.character(I232_MostImportantReasonStoppedFishing),
+         stop_decision_money_i241a = as.numeric(I241_MoneyReceivedYN),
+         stop_decision_money_why_i241b = as.character(I241_MoneyReceivedHow), 
+         stop_decision_time_i242a = as.numeric(I242_TimeSpentFishingYN),
+         stop_decision_time_why_i242b = as.character(I242_TimeSpentFishingHow),
+         stop_decision_difficulty_i243a = as.numeric(I243_DifficultyFishingYN), 
+         stop_decision_difficulty_why_i243b = as.character(I243_DifficultyFishingHow), 
+         stop_decision_regulation_i244a = as.numeric(I244_RegulationsYN),
+         stop_decison_regulation_why_i244b = as.character(I244_RegulationsHow), 
+         stop_decision_enviro_i245a = as.numeric(I245_EnvironChangesYN), 
+         stop_decision_enviro_why_i245b = as.character(I245_EnvironChangesHow)) %>% 
+  select(TimePoint, ParticipantID, fished_or_hired_3months_i1, hired_ever_i21, 
+         self_ever_i21, leased_ever_i21, forpay_ever_i21, last_fished_i22, starts_with("stop_"))
+```
+
+The above data frame should contain information for only those that answered "Yes" 
+though there are some 0s that should be missing.
+
+```{r}
+colSums(!is.na(fishing_behavior_nf)) ## counting non-missing values
+colSums(is.na(fishing_behavior_nf)) ## counting missing values
+```
+
+Replacing values of non-fisher variables with NA for fishers (fishers = `fished_or_hired_3months == 1`)
+
+```{r}
+
+fishing_behavior_nf %>% 
+  mutate_at(vars(hired_ever_i21, self_ever_i21, forpay_ever_i21, last_fished_i22,
+                 starts_with("stop_")), ~replace(.,fished_or_hired_3months_i1 == 1, NA))
+```
+
+Create a dataset for fishing behavior and motivation for **those who reported fishing** in the past 3 months
+
+```{r}
+fishing_behavior_f <- access %>% 
+  mutate(fished_or_hired_3months_i1 = as.numeric(I1_FishedOrHiredLaborLastThreeMosYN),
+         hired_now_i31 = as.numeric(I31_HireLabor), 
+         leased_now_i31 = as.numeric(I31_GoFishingUnderLease),
+         self_now_i31 = as.numeric(I31_GoFishingSelfEmployed),
+         forpay_now_i31 = as.numeric(I31_WorkAsHiredLabor),
+         enough_fish_i32 = as.character(I32_LastThreeMonthsEnufFish), 
+         quantity_change_i331 = as.character(I331_LastThreeMonthsQtyofFishChanged),
+         quantity_effect_frequency_i332 = as.numeric(I332_ChangeAffectedHowOftenFishYN),
+         quantity_effect_frequency_why_i333 = as.character(I333_ChangeAffectedHowOftenFishHow),
+         quantity_effect_investment_i334 = as.numeric(I334_ChangeAffectedHowMuchMoneySpendYN),
+         quantity_effect_investment_why_i335 = as.character(I335_ChangeAffectedHowMuchMoneySpendHow),
+         limits_use_i34 = as.character(I34_LastThreeMonthsLimitsAbilityToUseFish),
+         limits_use_most_i35 = as.character(I35_LastThreeMonthsMostImportantLimit),
+         change_money_i36a = as.numeric(I36a_MoneyCanMakeYN),
+         change_money_cause_i36b = as.character(I36b_MoneyCanMakeCauses),
+         change_money_direction_i36c = as.character(I36c_MoneyCanMakeIncreaseDecrease),
+         change_time_i37a = as.numeric(I37a_TimeSpentFishingYN),
+         change_time_cause_i37b = as.character(I37b_TimeSpentFishingCauses),
+         change_time_direction_i37c = as.character(I37c_TimeSpentFishingIncreaseDecrease),
+         change_difficulty_i38a = as.numeric(I38a_DifficultyFishingYN),
+         change_difficulty_cause_i38b = as.character(I38b_DifficultyFishingCauses),
+         change_difficulty_direction_i38c = as.character(I38c_DifficultyFishingIncreaseDecrease),
+         change_regulation_i39a = as.numeric(I39a_AllowedToFishYN),
+         change_regulation_cause_i39b = as.character(I39b_AllowedToFishCauses),
+         change_regulation_direction_i39c = as.character(I39c_AllowedToFishIncreaseDecrease),
+         change_enviro_i310a = as.numeric(I310a_EnvironChangesYN),
+         change_enviro_cause_i310b = as.character(I310b_EnvironChangesCauses),
+         change_enviro_direction_i310c = as.character(I310c_EnvironChangesIncreaseDecrease), 
+         shock_gearstolen_i311 = as.numeric(I311_GearsStolenYN),
+         shock_gearconfiscated_i311 = as.numeric(I311_GearsConfiscatedYN),
+         shock_hyacinth_i311 = as.numeric(I311_WaterHyacinthYN),
+         shock_weather_i311 = as.numeric(I311_WeatherChangesYN),
+         shock_fishdecline_i311 = as.numeric(I311_SevereFishDeclineYN),
+         shock_pricedecline_i311 = as.numeric(I311_SevereFishPriceDeclineYN),
+         shock_inputprice_i311 = as.numeric(I311_IncreaseGearLaborPricesYN),
+         shock_illness_i311 = as.numeric(I311_IllnessFamilyMemberYN),
+         shock_death_i311 = as.numeric(I311_DeathFamilyMemberYN),
+         shock_other_i311 = as.numeric(I311_OtherYN),
+         shock_otherspecify_i311 = as.character(I311_OtherSpecify)) %>% 
+  select(TimePoint, ParticipantID, fished_or_hired_3months_i1, leased_now_i31, 
+         self_now_i31, hired_now_i31, forpay_now_i31, enough_fish_i32, starts_with(c("quantity", "limits", "change", "shock")))
+```
+
+Replacing values of fisher variables with NA for non-fishers (non-fishers = `fished_or_hired_3months == 0`)
+
+```{r}
+
+fishing_behavior_f <- fishing_behavior_f %>% 
+  mutate_at(vars(hired_now_i31, self_now_i31, forpay_now_i31, leased_now_i31, 
+                 starts_with(c("quantity_", "limits", "change", "shock"))), ~replace(.,fished_or_hired_3months_i1 == 0, NA))
+            
+```
+
+
+In some time points, the fishing access questionnaire includes likert scale questions about perecpetions/preferences related to fishing. Currently excluding these because it's not clear how I will use them, but I may bring them in later.
+
+Next step is to combine the fisher and non-fisher questionnaires in a way that the overlapping questions merge, and the remaining questions append.
+
+
+
+
+**ORGANIZE AND EXPLORE RELEVANT MORBIDITY QUESTIONS**
+
+```{r}
+mh <- morbidity %>% 
+  mutate(health_l1 = L1_HealthStatus,
+         pain_l1 = L2_PainPastThirtyDays,
+         social_limit_l121 = L121_HealthLimitSocialActivities_FreqID, 
+         anxious_l122 = L122_NervousAnxious_FreqID,
+         calm_l123 = L123_CalmPeaceful_FreqID,
+         depressed_l124 = L124_Depressed_FreqID,
+         happy_l125 = L125_Happy_FreqID,
+         depressed_extra_l126 = L126_VeryDepressed_FreqID,
+         energy_full_l127 = L127_FullLifeEnergy_FreqID, 
+         energy_none_l128 = L128_WithoutEngery_FreqID,
+         tired_l129 = L129_Tired_FreqID,
+         energy_enough_l1210 = L1210_EnoughEnergy_FreqID,
+         weighed_down_health_l1211 = L1211_WeighedDownByHealth_FreqID,
+         discouraged_health_l1212 = L1212_DiscouragedByHealth_FreqID,
+         despair_health_l1213 = L1213_DespairOverHealth_FreqID, 
+         afraid_health_l1214 = L1214_AfraidBecauseHealth_FreqID, 
+         reasoning_diffiuclty_l1215 = L1215_DifficultyReasoningDecisions_FreqID, 
+         forgetting_l1216 = L1216_ForgotThings_FreqID, 
+         attention_l1217 = L1217_TroubleKeepingAttention_FreqID,
+         concentration_l1218 = L1218_DifficultyConcentrationThinking_FreqID,
+         lifequality_l14 = L14_QualityOfLife) %>% 
+  select(TimePoint, ParticipantID, (starts_with(c("health", "pain", "social", "anxious", "calm", "depressed", "happy", "energy", "tired", "weighed", "discouraged", "despair", "afraid", "reasoning", "forgetting", "attention", "concentration", "life" ))))
+
+```
+

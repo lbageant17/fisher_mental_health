@@ -1,5 +1,5 @@
 ---
-title: "Notes"
+title: "NOTES"
 output: html_document
 ---
 
@@ -7,12 +7,35 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Mfangano Data
+AS OF DECEMBER 20, 2021 THIS DOCUMENT IS NO LONGER BEING USED AND NOTES ARE IN OBSIDIAN.
+
+**Note: next steps notes are in a word document**
+### Mfangano Data
+
+#### Mfangano household survey:  
+
+Sample:
+
+* SRS of regions of Mfangano. Regions: North, South, East, West (bordering lake shore); Takawiri island, Sokolo (on top of mountain at center of island).  
+* Households had to have at least 1 child under 24 months in residence
+* 5 child deaths resulted in removal of some households. Original sample 303, working sample 299.
+
+Time series:
+
+* December 2012 - April 2015
+* 9 time points (every 3 months)
+
+Relevant modules and time points:
+
+* Sociodemographics: 1, 5, 9
+* Income: all time points
+* Fishing activities: all time points
+* Agriculture: 1, 5, 9
+* Fishery access: 1, 3, 5, 7, 9
+* Fisher (and mother) morbidity, incl. mental health: all time points
 
 
-
-
-## King et al 2021 Methods
+### King et al 2021 Methods
 
 *No regression used at all.* Does not have a broad set of fisher characteristics to use as controls. Unable to assess whether the differences are due to selection into different categories (e.g. skipper vs crew or inshore vs offshore) or reverse causality, versus a causal effect. (They don't claim anything causal)
 
@@ -20,7 +43,7 @@ Uses qualitative coding, PCA and tests of differences among groups.
 
 What is prevalence of psychological distress among fisher respondents?
 
-* calculated prevalence and compard to nationally representative statistics
+* calculated prevalence and compared to nationally representative statistics
 
 What are the primary perceived stressors experienced by fisher respondents?
 
@@ -38,5 +61,37 @@ Does perception of stressors vary in relation to K10 scores?
 
 * oneway ANOVA
 
-*No regression used at all!*
+
+### Pathways: Environmental change --> Psychological distress/wellbeing
+
+#### Acute trauma
+
+Bushfires, flooding (Charleson et al has a few cites)
+
+#### Income loss
+
+Kahneman and Deaton 2010 PNAS paper. Reason to believe that the income pathway may not be the most salient or only salient pathway between resource access and mental health. From the abstract: "Income and education are more closely related to life evaluation, but health, caregiving, loneliness and smoking are relatively stronger predictors of daily emotions. When plotted against log income, life evaluation rises steadily. Emotional well-being also rises with log income, but there is no further progress beyond an annual income of ~75k. Low income exacerbates the emotional pain associated with such misfortunes as divorce, ill health, and being alone."
+
+Ribot and Peluso: access is, in part, an **ability** to derive benefits from things. Income can potentially facilitate that ability.
+
+### Environmental change: how are people thinking about it in mental health papers? 
+
+#### Temperature changes
+
+Charleson et al 2021 cites several papers that link high temperatures to emotional distress, crisis line usage, mental health difficulties. 
+
+#### Drought
+
+Lots of studies from Australia looking at drought and farmers (cited in Charlson 2021). Quality of these might be higher--longitudinal, using K10 scale.
+
+Multi-country study looking at rainfall and mood disorders (Rotge et al 2014 cited by Charlson)
+
+#### Wildfire
+
+Two citations in Charleson et al 2021: One qualitative from NW Territories and one in Arizona.
+
+#### Flooding
+
+Four citations in Charleson et al 2021: Australia (qualitative), UK (cohort study) and two others on "psychological impacts of perceived risk"
+
 

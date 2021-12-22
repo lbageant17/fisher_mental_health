@@ -8,6 +8,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+AS OF DECEMBER 20, 2021 THIS IS IN OBSIDIAN. MAYBE WE'LL MOVE IT BACK LATER IF WE WANT TO MAKE A DYNAMIC DOCUMENT.
+
 ### Introduction
 
 What is the relationship between fishers’ access to fish and their mental wellbeing
@@ -27,11 +29,13 @@ Following King et al methodology
 
 What do we know about fisher mental health in general?
 
+* Disruption of fishery --> high levels of persisting mental distress (Scyphers et al 2019). Relevant covariates: trust, coccupational diversity, employment of family members, # of employees, # of dependents, income, gender, birth year, marital status.
+
 What do we know about natural resource access and mental health?
 
 What are potential resource-health (or mental health if enough lit) pathways that have been explored?
 
-Context: What do we know aobut fisher health on Mfangano
+Context: What do we know about fisher health on Mfangano
 Context: What drives fish access on Mfangano? 
 
 Context: What do we know about fishing on Mfangano?

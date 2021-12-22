@@ -5,8 +5,16 @@
 .RData
 .Ruserdata
 
-# word docs
-.docx
+# microsoft docs
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+
+# pdfs
+*.pdf
 
 # data and literature
 /data
