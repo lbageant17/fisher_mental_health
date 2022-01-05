@@ -16,6 +16,10 @@
 # pdfs
 *.pdf
 
+# image files
+.png
+.jpg
+
 # data and literature
 /data
 /lit 
