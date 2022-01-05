@@ -512,7 +512,11 @@ table(fishers$stop_decision_enviro_i245a, fishers$TimePoint, dnn=c("Yes/No", "Pe
 
 ```
 
+Did whether or not you are allowed to fish (regulations) affect your decision to stop fishing?
 
+```{r}
+table(fishers$stop_decision_regulation_i244a, fishers$TimePoint, dnn=c("Yes/No", "Period"))
+```
 
 
 
