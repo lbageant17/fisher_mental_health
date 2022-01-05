@@ -475,36 +475,41 @@ fishers %>%
 
 
 
-
 Fishing behavior among those that fished
-Among those that fished, 
 
-Fishing behavior among those that did not fish
-Among those that did not fish, very few cited environmental concerns that contributed to them not fishing.
+Among those that fished, there is a lot of variation in **perceptions of environmental changes** that affect fishing. 
+
+```{r, results = "hold"}
+print("In the last 3 months has there been an effect on the following: Environmental changes that affect fishing (examples: algae, water hyacinth)")
+table(fishers$change_enviro_i310a, fishers$period, dnn=c("Yes/No", "Period"))
+```
+
+Variation in eports of **weather changes** affecting ability to fish
 
 ```{r}
-fishers %>% 
-  filter(fished_i1 == 1) %>% 
-  #select(stop_decision_enviro_i245a) %>% 
-  summarise(yes = n())
-  knitr::kable()
+print("Have any of the following shocks affected your ability to fish in the last 3 months? Weather changes")
+table(fishers$shock_weather_i311, fishers$TimePoint, dnn=c("Weather Changes", "Period"))
+```
 
-doink <- fishers %>% 
-  filter(fished_i1 == 1) %>% 
-  select(stop_decision_enviro_i245a) %>% 
-  mutate(yes = as.numeric(stop_decision_enviro_i245a == 1),
-         no = as.numeric(stop_decision_enviro_i245a == 0))
+Limited reports of **water hyacinth**
+```{r}
+table(fishers$shock_hyacinth_i311, fishers$TimePoint, dnn=c("Hyacinth", "Period"))
+```
 
-table(doink$yes)
-table(doink$no)
+Almost everyone reported **severe fish decline** to the point where 
+```{r}
+table(fishers$shock_fishdecline_i311, fishers$TimePoint, dnn=c("Severe fish decline", "Period"))
+```
 
 
-  group_by(stop_decision_enviro_i245a) %>% 
-  summarize(n = n())
-  
-  knitr::kable()
-  
-table(fishers$stop_decision_enviro_i245a, useNA = "always")
+
+Fishing behavior among those that did not fish
+Among those that did not fish, very few cited **environmental changes that contributed to them not fishing**
+
+```{r, results = "hold"}
+
+table(fishers$stop_decision_enviro_i245a, fishers$TimePoint, dnn=c("Yes/No", "Period"))
+
 ```
 
 
