@@ -1,0 +1,74 @@
+---
+title: "misc"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Sample:
+- SRS of regions of Mfangano. Regions: North, South, East, West (bordering lake shore); Takawiri island, Sokolo (on top of mountain at center of island).  
+- Households had to have at least 1 child under 24 months in residence
+- 5 child deaths resulted in removal of some households. Original sample 303, working sample 299.
+
+Time series:
+- December 2012 - April 2015
+- 9 time points (every 3 months)
+
+Relevant modules and time points:
+
+- Sociodemographics: 1, 5, 9
+- Income: all time points
+- Fishing activities: all time points
+- Agriculture: 1, 5, 9
+- Fishery access: 1, 3, 5, 7, 9
+- Fisher (and mother) morbidity, incl. mental health: all time points
+
+Max of 5 time points for some fishery access questions, 3 time points for others.
+
+MENTAL HEALTH MEASURE:
+- Relatively straightforward.
+- See [[MOS-HIV]] for details on the measure and how to construct.
+
+
+FISHERY ACCESS MEASURE:
+
+From Katie: Initially module was built with questions linked to each element in [[Ribot and Peluso 2003]], but then we modified it a lot in piloting and enumerator training because some questions were obvious (e.g. everyone wants to catch more if they could) and others felt repetitive so couldn't be meaningfully distinguished when translated. It was definitely an interative process!
+
+**Challenge:** convincingly constructing a measure or measures of fishery access using questionnaire.
+
+[[Ribot and Peluso 2003]] access mechanisms. Do any of these map to the questionnaire?
+
+[I_FISHERY_ACCESS_03Dec2013.doc](file:///Users/erb32/github/fisher_mental_health/data/Survey%20Instruments%20and%20Instructions/Questionnaires-12%20Month%20Follow-Up/I_FISHERY_ACCESS_03Dec2013.doc)
+
+Mechanisms can be:
+- rights-based--sanctioned by law, custom, convention
+- illicit
+	- I.4.25 "I (or my fishing operation) always follow the catch and gear limits"
+- structural or relational--mediate or operate parallel to rights-based and illicit
+	- _access to technology_ 
+		- I.4.46 I have all the materials (fishing nets, boat, etc) that I need to catch enough fish.
+	- _access to capital_
+	- _access to markets_
+		- I.4.10 "If I want to sell a fish, I always have someone to sell to"
+	- _access to labor (others' labor or ability/opportunities to use ones own)_
+		- I.4.35 "If I do not feel well, I (or my fishing operation) am unable to fish"
+		- I.4.36 "If someone in my family is sick, I (or my fishing operation) am unable to fish"
+	- _access to knowledge_
+		- I.4.7 "I have the skills to be a successful fisher" 
+		- I.4.8 "I need to learn more skills to be able to catch more fish"
+	- _access to authority_
+	- _access through social identity_
+		- I.4.1 "My people/ancestors are fishers
+		- I.4.2 "I define myself as a fisher" (??)
+	- _access via negotiation of other social relations (e.g. trust, reciprocity, obligation, patronage)_
+
+- Additional questions that might be coded into something meaningful:
+	- I.3.4 "In the last 3 months, what limits your ability to make use of the fish in the lake? (If nothing, write "none")"
+	- I.3.5 "In the last 3 months, which do you feel is the most important limit to your ability to make use of the fish in the lake?"
+
+Issues:
+- I.3.4 and I.3.5 seem potentially quite useful, but are only asked of those who fished in the last period. For those who did not fish, the questionnaire asks why they stopped fishing (I.2.3.1 and I.2.3.2), which is not quite comparable.
+- The fisheries access questions from I.4.1-I.4.47 are also only asked of fishers who fished in the last period, but not those who did not. It is also only asked in 3 time periods (baseline, 12 months, 24 months). 
+
+	
