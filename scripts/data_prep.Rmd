@@ -1,0 +1,234 @@
+---
+title: "Initial Data Exploration"
+author: "Liz Bageant"
+date: "12/22/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "hide")
+```
+
+This is the first initial exploration of the Mfangano data for the fisher mental health paper. Will keep notes simple for now. 
+
+```{r , echo = FALSE, include = FALSE}
+#install.packages("tidyverse")
+#install.packages("skimr")
+#install.packages("ggpubr")
+library(ggpubr) 
+library(tidyverse) 
+library(skimr)
+library(infer) #install.packages("infer")
+
+```
+
+Make folder paths
+
+```{r}
+projectFolder  <- "~/github/fisher_mental_health"
+data <- file.path(projectFolder, "data/csv")
+```
+
+
+
+```{r}
+access <- read.csv(file.path(data, "tbl_I_FisheryAccess.csv"), na.strings=c("", "NA"))
+morbidity <- read.csv(file.path(data, "tbl_L_Morbidity.csv"))
+
+# create a vector of fisher IDs. Access qx only asked of fishers, so pulling from there.
+fishers_only <- access %>% 
+  select(ParticipantID) %>% 
+  unique()
+
+dim(fishers_only) # 269 unique fishers in the sample (though not all of them fished at all time periods)
+
+```
+
+
+
+
+
+
+
+
+**COMBINE MORBIDITY AND FISHER BEHAVIOR DATA FRAMES**
+```{r}
+
+fishers <- full_join(fisher_mh_subscale, fishing_behavior, key = c("ParticipantID", "TimePoint"))
+
+# cleaning up workspace before visualizing some things
+
+rm(access, fisher_mh, fisher_mh_recode, fishing_behavior, fishing_behavior_f, fishing_behavior_nf, maxx, minn, mh_sub, morbidity, x, moshiv)
+
+# using TimePoint to create "period" variable that we can treat as numeric for time series analysis
+table(fishers$TimePoint, useNA = "always")
+
+fishers <- fishers %>% 
+  mutate(period = as.numeric(recode(TimePoint,
+                         "0" = "1",
+                         "3" = "2",
+                         "6" = "3", 
+                         "12" = "4",
+                         "18" = "5",
+                         "24" = "6",
+                         .default = "99"))) # i think this sets missing values to 99
+
+table(fishers$period)
+
+
+```
+
+
+
+
+
+
+**VISUALIZE FISHER MENTAL HEALTH DATA**
+
+Key takeaways from plots/tables below, as of 12/24/2021:
+
+* The variation is not impressive. 
+* The bulk of the sample is in the "some of the time" or "none of the time" categories, not "most of the time" or "all of the time". 
+* The bulk of the movement seems to be between "some of the time" and "none of the time" too
+
+Ideas for next steps: 
+
+* What do mothers' mental health subscales look like? 
+  * How different are they from fishers?
+  * Are they collected at every time point?
+
+
+
+Plotting fisher mental health subscale over time.
+
+```{r}
+
+ggplot(data = fishers) +
+  geom_jitter(mapping = aes(x = period , y = mh_subscale)) 
+ggsave("../images/mh_scatter_by_period.png")
+
+histogram <- ggplot(fishers) +
+  geom_histogram(mapping = aes(x = mh_subscale)) +
+  facet_wrap(~ period)
+ggsave("../images/mh_histogram_by_period.png")
+
+ggplot(fishers) +
+  geom_density(mapping = aes(x = mh_subscale)) +
+  facet_wrap(~ period)
+ggsave("../images/mh_density_by_period.png")
+
+```
+
+
+I now want to know some summary statistics. What is the overall mean, the mean by period and the within-person mean. 
+```{r, results = "hold"}
+
+# summary statistics by period
+fishers %>% 
+  group_by(period) %>% 
+  summarise(mean = mean(mh_subscale), median = median(mh_subscale), sd = sd(mh_subscale)) %>% 
+  knitr::kable(caption = "Fisher MH subscale by period")
+
+ggplot(fishers, aes(x = as.factor(period), y = mh_subscale)) +
+  geom_boxplot() +
+  labs(title = "Mental Health Subscale by period")
+ggsave("../images/mh_boxplot_by_period.png")
+
+```
+
+Quick calculation of within-household mean and SD. 
+```{r, results = "hold"}
+within_means <- fishers %>% 
+  group_by(ParticipantID) %>% 
+  summarise(mean = mean(mh_subscale), sd = sd(mh_subscale)) 
+within_means %>% 
+  summarise(mean1 = mean(mean), sd = sd(mean)) %>% 
+  knitr::kable(caption = "Within-fisher mean and SD")
+            
+```
+
+```{r}
+
+ggplot(within_means) +
+  geom_histogram(mapping = aes(x = mean)) +
+  labs(title = "Distribution of within-household means of Mental Health Subscale scores")
+
+ggplot(within_means) +
+  geom_histogram(mapping = aes(x = sd)) +
+  labs(title = "Distribution of within-household standard deviations of Mental Health Subscale scores")
+
+```
+
+
+**VISUALIZE FISHER BEHAVIOR**
+
+Fishers' decision to fish over time is pretty stable on average across fishers. On average, 60-70% of fishers fished in the past 3 months.
+```{r}
+
+# Examining missing values of fisher behavior. There are 15 cases with no clear pattern in terms of time point. Individual EOO92 is missing five time points.
+fishers %>% 
+  filter(is.na(fished_i1)) # all missing cases of fished_i1 --> completely missing fisher behavior
+fishers %>% 
+  filter(is.na(period))
+
+# Filtering out missing fisher behavior data and summarizing by period
+fishers %>% 
+  filter(!is.na(fished_i1)) %>% 
+  group_by(period) %>% 
+  summarise(mean = mean(fished_i1, na.rm = TRUE), sd = sd(fished_i1, na.rm = TRUE)) %>% 
+  ggplot(decision, mapping = aes(x = period, y = mean)) +
+  geom_path(group = 1) +
+  ylim(0, 1) +
+  labs(title = "Share of fishers who fished in any given period", y = "Share", x = "Period")
+  
+
+```
+
+
+
+Fishing behavior among those that fished
+
+Among those that fished, there is a lot of variation in **perceptions of environmental changes** that affect fishing. 
+
+```{r, results = "hold"}
+print("In the last 3 months has there been an effect on the following: Environmental changes that affect fishing (examples: algae, water hyacinth)")
+table(fishers$change_enviro_i310a, fishers$period, dnn=c("Yes/No", "Period"))
+```
+
+Variation in eports of **weather changes** affecting ability to fish
+
+```{r}
+print("Have any of the following shocks affected your ability to fish in the last 3 months? Weather changes")
+table(fishers$shock_weather_i311, fishers$TimePoint, dnn=c("Weather Changes", "Period"))
+```
+
+Limited reports of **water hyacinth**
+```{r}
+table(fishers$shock_hyacinth_i311, fishers$TimePoint, dnn=c("Hyacinth", "Period"))
+```
+
+Almost everyone reported **severe fish decline** to the point where 
+```{r}
+table(fishers$shock_fishdecline_i311, fishers$TimePoint, dnn=c("Severe fish decline", "Period"))
+```
+
+
+
+Fishing behavior among those that did not fish
+Among those that did not fish, very few cited **environmental changes that contributed to them not fishing**
+
+```{r, results = "hold"}
+
+table(fishers$stop_decision_enviro_i245a, fishers$TimePoint, dnn=c("Yes/No", "Period"))
+
+```
+
+Did whether or not you are allowed to fish (regulations) affect your decision to stop fishing?
+
+```{r}
+table(fishers$stop_decision_regulation_i244a, fishers$TimePoint, dnn=c("Yes/No", "Period"))
+```
+
+
+
+

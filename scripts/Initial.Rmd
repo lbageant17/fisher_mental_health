@@ -222,7 +222,7 @@ mh_sub <- moshiv %>%
 dim(mh_sub) #3779 observations
 ```
 
-Extract only fisher information from the MH subscale data. We may do analysis with mothers later, but not at this time. 
+Extract only fisher information from the MH subscale data. 
 
 ```{r}
 fisher_mh <- left_join(fishers_only, mh_sub, by = "ParticipantID")
@@ -230,15 +230,25 @@ nrow(fisher_mh) # 1347 fisher obs (approx 5 obs per fisher, which seems correct)
 
 ```
 
+
+Create a separate file for mother's MH
+```{r}
+mother_mh <- mh_sub %>% 
+  anti_join(fishers_only, by = "ParticipantID")
+nrow(mother_mh) ## 2433 observations--so many more than fishers.
+```
+
+
 What does the time series look like? 
 
 ```{r, results = "hold"}
 table(fisher_mh$TimePoint, useNA = "always")
+table(mother_mh$TimePoint, useNA = "always")
 
 ```
 
-It looks like data were collected in time point 0, which I didn't realize. Time point 9, 15 and 21 each have a single observation. Examining them more closely.
-There is also a missing value in time point, which I will remove. 
+Data were collected at every time point for mothers, but not every time point for fishers. It looks like data were collected in time point 0, which I didn't realize. For fishers, time points 9, 15 and 21 each have a single observation for fishers. Examining them more closely below.
+There is also a missing value in time point, addressed below.
 
 ```{r, results = "hold"}
 

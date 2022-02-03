@@ -1,0 +1,103 @@
+---
+title: "explore_demographics"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE, include = FALSE}
+# RMarkdown's insistence on file paths and packages in the same file
+library(tidyverse) 
+projectFolder  <- "~/github/fisher_mental_health"
+data <- file.path(projectFolder, "data/csv")
+
+```
+
+
+Bring in demographic files
+
+```{r}
+
+demog <- read.csv(file.path(data, "tbl_A_SocioDemog.csv"), na.strings = c("", "NA"))
+
+```
+
+According to the questionnaire, this file pertains to the mother only. However, there are 4 males listed in the file
+
+```{r}
+table(demog$A1_Gender)
+summary(demog$A1_Gender)
+
+head(demog %>% 
+       select(ParticipantID, A1_Gender) %>% 
+       filter(A1_Gender == "1 - Male"))
+```
+
+Investigating further: Of the ParticipantIDs that are associated with males, do they appear as females at a different time point?
+
+```{r}
+subset <- demog %>% select(TimePoint, ParticipantID, A1_Gender)
+head(subset %>% filter(ParticipantID == "E0512"))  # this is a woman
+head(subset %>% filter(ParticipantID == "S0053"))  # this is unclear
+head(subset %>% filter(ParticipantID == "S0103"))  # this is unclear
+head(subset %>% filter(ParticipantID == "W0072"))  # this is a woman
+rm(subset)
+```
+
+As a separate check, I am going to look at the fisher access survey which is only asked of fishers, all of whom are male. 
+
+```{r}
+a <- read.csv(file.path(data, "tbl_I_FisheryAccess.csv"), na.strings=c("", "NA"))
+
+# create a vector of fisher IDs. Access qx only asked of fishers, so pulling from there.
+fishers_only <- a %>% 
+  select(ParticipantID) %>% 
+  unique() %>% 
+  mutate(male = 1)
+
+dim(fishers_only)      # 269 unique fishers in the sample
+
+head(fishers_only %>% filter(ParticipantID == "E0512"))  # this is a woman
+head(fishers_only %>% filter(ParticipantID == "S0053"))  # this is confirmed to be a man
+head(fishers_only %>% filter(ParticipantID == "S0103"))  # this is confirmed to be a man
+head(fishers_only %>% filter(ParticipantID == "W0072"))  # this is a woman
+
+rm(a) # removing a, but keeping fishers_only for reference
+```
+
+
+Participant
+
+To complement `fishers_only` file, I will generate a `mothers_only` file containing ParticipantIDs of mothers and excluding the two ParticipantIDs above that have been confirmed as male.
+
+```{r}
+
+mothers_only <- demog %>% 
+  filter(ParticipantID != "S0053" & ParticipantID != "S0103") %>% 
+  select(ParticipantID) %>% 
+  unique() %>% 
+  mutate(female = 1)
+
+dim(mothers_only)      #313 unique mothers in the sample
+
+```
+
+ParticipantID E0092 is listed as a fisher and a mother, but is a mother, so removing her from fishers_only. 
+ParticipantID W0233 is listed as a fisher and a mother, but is a fisher, so removing him from mothers_only
+
+```{r}
+
+fishers_only <- fishers_only %>% filter(ParticipantID != "E0092")
+mothers_only <- mothers_only %>% filter(ParticipantID != "W0233")
+
+```
+
+
+
+Saving the workspace so that I can knit in subsequent Rmd documents
+```{r}
+save.image("scripts/demog")
+```
+
