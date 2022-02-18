@@ -1,0 +1,145 @@
+---
+title: "Manuscript"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## How does resource access relate to mental health? 
+
+### Introduction
+
+Global environmental change is driving significant shifts in resource use and access regimes worldwide. This has far-reaching material impacts on human well-being. The potential impact of climate change, and its diverse manifestations, on mental health is highlighted in recent influential reports, including the Lancet Global Countdown (2021) and the American Psychological Association's (2017) report on the mental health impacts of climate change. To better understand how changes in resource acess can relate to mental health, we use detailed household survey data from the fishing community on Mfangano Island in Lake Victoria, Kenya as a case study.
+
+These relationships are inevitably complex. This descriptive work attempts to tease out what pathways and relationships it can, but does not aim to make causal claims. Our goal is to provide a thoughtful case study that points to clear directions for future work. 
+
+### Background 
+
+
+##### Mental health and environmental change
+There is a lot of concern about the ongoing and potential health effects of climate change, with the most recent Lancet Countdown Report (2021) highlighting profound inequities in health outcomes, including new inequities and those that were pre-existing and exacerbated by climate change. The largest body of work focuses on impacts on physical health, nutrition and food security. Mental and emotional health effects are considerably less studied. This particular gap is a burgeoning focal point of research.
+
+Existing work on mental health, emotions and environmental change centers on climate change. Theoretical contributions to this space include discussions of solastalgia (Albrecht et al 2027) and ecological grief (Cunsolo and Ellis 2019), particularly among indigenous populations in the Arctic and Australia where the effects of climate change are felt daily. [describe these concepts a bit more somewhere as needed]. 
+
+There is a growing body of work on the impacts of temperature, rainfall, drought, and increasing variability of weather conditions, on mental health outcomes in a variety of contexts. [Cite these (many) papers and outline any key/surprising findings.] These topics are appealing, in part because such work is methodologially tractable due to the availability and global coverage of remote sensing data.
+
+However, one can easily imagine many factors--biophysical, sociological, psychological, economic, geographic, political--that mediate the relationship between global phenomena (temperature rise, rainfall, variability, etc) and the physical or socio-emotional wellbeing of individual humans and communities. While large scale analyses provide compelling evidence on the overall impact of global phenomena on outcomes, actionable change comes from better understanding the many processes and dynamics that take place along the causal chain. 
+
+##### Access
+
+This work does not attempt a comprehensive accounting of the broad range of factors mentioned above. Rather, it focuses on communities' and individuals' access to natural resources as a potentially important mechanism. Changing climate conditions are a key driver of changes in natural resource access regimes (cite). We draw heavily on Ribot and Peluso's (2003) theory of access as the _ability_ to derive benefits from something, whether or not you opt to do so at a given point in time. This is distinct from having the _right_ to derive benefits, which in many cases cannot be realized by potential resource users due to other constraints. This framework of access goes beyond property rights to encompass a "wider range of social relationships that can constrain or enable people to benefit from resources."
+
+Ribot and Peluso identify a set of structural dimensions that can mediate one's ability to derive benefits from a resource. We consider access as a social phenomenon, with Ribot and Peluso's first dimension, *negotiation of social relations*, as a dynamic and ongoing process out of which culminates what we observe of the other seven dimensions, described below. Access is  obtained via social negotiations, including via kinship, friendship, patronage or other social relationships, each with their complex reciprocal obligations and expectations which may be explicit or implicit. Such negotiations underpin the following seven dimensions, the first of which is *technology* that can be used to extract or reach a resource. Technology is closely related to access to  *capital* which may include technological equipment, but also financing that can be used in the process of acquiring or maintaining the flow of benefits from a resource. *Markets* mediate someone's ability to derive economic benefit from a resource in a multitude of ways, both in terms of the actor's direct interaction with the market, and market forces that may indirectly shape a resource user's ability to interact with the environment and benefit from a resource. *Labor* and labor opportunities, and their interactions with markets, shape who benefits from a resource both in terms of the resource user's ability to employ one's own labor and that of others. Labor market conditions, for example, may be a limiting or supporting factor for a resource user to derive benefits from a resource. Access to *knowledge* includes the basic technical know-how of resource extraction, but also indigenous and cultural knowledge systems, rituals and local discourses that shape social relations around resource use. The nature of interactions with *authority* figures and regulations associated with formal and informal governance systems also shape an actor's ability to make use of a resource. *Social identity* is a key mediating factor to access, whether via formal legal structures, or socially determined identity-based rights and privileges to access resources, or influence  the management of a resource or associated dimensions of access. 
+
+##### Fisher mental health  
+
+
+What do we know about fisher mental health in general? [to be further developed]
+
+- Disruption of fishery --> high levels of persisting mental distress ([[Scyphers et al 2019]]). Relevant covariates: trust, coccupational diversity, employment of family members, # of employees, # of dependents, income, gender, birth year, marital status.
+
+- King et al 2020: High prevalence of psychological distress among fishers in Australia compared to general population. Climate change not a common explicitly perceived stressors, but regulation, isolation and unpredictability were perceived stressors.
+
+##### Study site 
+
+
+[add context here]
+What do we know about health on Mfangano, mental health or otherwise?
+
+Cite past work on Mfangano 
+
+- Health-environment feedback loops.
+
+- Fishers experiencing illness in Mfangano still fish, but they do so using more environmentally destructive methods [[Fiorella et al 2017]]. Both physical and mental health were assessed and, physical health drove the behavior change, while mental health did not.
+
+What do we alreayd know about what drives fishery access on Mfangano? 
+
+What do we need to know about fishing on Mfangano to understand this work?
+
+
+### Data and Methodology
+
+Structure and purpose of survey
+
+We use data from Mfangano Island on the Kenya side of Lake Victoria (see map below). The data were collected between December 2012 and April 2015 as part of the Mfangano Research on Environmental and Community Health Study (RECH), a collaboration of the Univrsity of California, Berkeley and Organic Health response. The survey samples approximately 300 households with at least one child under 24 months at baseline. Households were interviewed every three months for a total of nine time points.
+
+![[Screen Shot 2022-02-16 at 8.35.36 AM.png]]
+
+The survey collected a broad range of data, including demographic characteristics, livelihood information, detailed information on fishing activities, morbidity information for multiple adults in the household, detailed consumption data for mother and child, child anthropometry and developmental information and adult sexual behavior. Some modules were collected at all time points, while others were collected at less frequent intervals.
+
+
+##### Key Variables
+
+The key variables from this work (so far) are drawn from the following survey modules: Morbidity, Fisheries Access and Fishing Activities. Morbidity information, which which we calculate a mental health measure, is collected at every time point for the household adult female and at a subset of time points for the household adult male. Within the Fisheries Access module, certain questions (I1-I3) are asked more frequently than others (I4). Fishing Activities are recorded at every time point. The availability of each set of data at each time point is summarized in Table 1. 
+
+![[Screen Shot 2022-02-16 at 9.06.08 AM.png]]
+
+**Mental health outcome variable(s)** 
+
+The Medical Outcome Survey-HIV (MOS-HIV) is a patient-reported quality of life measure. It was designed to assess quality of life in the context of HIV treatment, where side effects of drug treatments can have significant impact on difficult-to-measure-but-very-important parameters such as energy levels and pain. It was designed for use in clinical trials, but is commonly used in observational studies (Wu 1999). At the time of the Mfangano RECH survey, a significant portion of the population was HIV+. The scale contains 35 questions assessing 10 dimensions of health-related quality of life. It contains multiple fully validated subscales, including the Mental Health Summary, which is a key outcome variable in this paper. Within the Mental Health Summary, one or more items from four major mental health dimensions--anxiety, depression, loss of behavioral/emotional control and psychological wellbeing--are included in the scale (Wu 1999).  The questions are as follows:
+
+1. Have you been a very nervous person?
+2. Have you felt calm and peaceful?
+3. Have you felt downhearted and blue? (Asked as: "Have you felt depressed?" in RECH data)
+4. Have you been a happy person?
+5. Have you felt so down in the dumps that nothing could cheer you up ?
+
+Note that some of the questions reflect positive states, while others reflect negative states. This is designed to avoid response-set effects (cite Viet and Ware 1983?), or the tendency to answer similarly across all questions in a given section of a survey. Response options for the original questions are a six-item scale ranging from "all of the time" to "none of the time". This was revised to a similar four-item scale in the RECH survey. The subscale is calculated by re-coding and standardizing per Wu 1999 to generate a score between 0-100, where higher scores reflect better health status.
+
+**Explanatory variables of interest** 
+
+
+The Fisheries Access Module contains information on whether a household member fished (I1) and then access constraints are reported by households, whether they fished or did not fish (I2 and I3). See Table 2 for specific access constraint questions which are parallel, but not identical. (See question for the group in the Analysis Plan section). We can think of these data as supporting a measure of **reported access constraints**, keeping in mind that one's perceptions of their access constraints may not capture the full suite of constraints they face due to various biases that affect reporting.
+
+
+In addition to the access constraint questions in Table 2, the Fisheries Access module contains a set of questions collected less frequently (I4), many of which we are able to map to the Ribot and Peluso definition of access to create a more theoretically grounded and comprehensive access index that we will henceforth call the **R&P access index**. In addition, several questions from Fishing Activities (C) map nicely to the R&P framework. We have provided an initial mapping in Table 3. There are at least two challenges in constructing and using a R&P access index using these data: 
+1. The high number of variables involved would need to be reduced or summarized in some way. This could be done through factor analysis, to generate a summary index. There may be other ways of aggregating these data. Tradeoffs in aggregation approaches need to be carefully considered.
+2. The majority of questions in Table 3 (all I4 questions) are collected only when the household reported fishing activities in the previous 3 months. In any period, approximately 1/3 of households did not fish in the prior 3 months, and therefore would not have this information. Given unobserved selection into fishing participation that may be related to mental health, estimates using only the subsample that fished are likely to be biased. More discussion on this in the analysis plan.
+
+![[Screen Shot 2022-02-16 at 10.14.30 AM.png]]
+
+**Control variables** 
+
+
+I have not spent a lot of time thinking about this yet, but a throughtful and robust set of controls will be an important part of the analysis that we do. Relevant controls might include other health status information, income, demographics. 
+
+#### Analysis Plan
+
+Overall analysis considerations:
+
+1. **Reverse causality**: Just as resource access may impact mental health status, it is likely that poor mental health status could undermine someone's ability to negotiate the social structures needed to obtain/maintain access to a resource. I do not anticipate being able to overcome this and plan to state it clearly as a limitation of this research.
+
+2. **Unobserved individual characteristics** are likely at play in these relationships. For example, two people with identical mental health and resource access profiles may have differing levels of social support, coping ability, or other difficult-to-observe characteristics that relate directly to the access-mental health relationship tha we are interested in. To some extent these can be addressed analytically (see below), but not entirely.
+
+3. Question for the group: Is it interesting to look at **variability** in mental health as well as **levels**? For example, is someone with stable, but lower levels fundamnetally different (better off?) than someone whose levels fluctuate wildly? Is it worth investigating those things separately?
+
+4. **Data gap**: R&P access index can only be constructed for those that fished in previous 3 months. Some of the information contained in the index may be relatively time-invariant (e.g. social identity), while other information (e.g. access to markets) could easily change between data collection time points.
+
+5. **Data question for the group**: Given the parallel nature of the questions in Table 2, would you attempt to combine them or keep them separate? 
+
+6. **How do we know our R&P access index is meaningful?** It may be theoretically grounded, but if it doesn't predict fishing at the intensive/extensive margin, or fish catch or something we would expect to be correlated with access, we may need to re-evaluate.
+
+**The original dream: robust time series analysis with household or individual fixed effects**
+
+My original hope for analysis was to regress mental health time series on an R&P access time series, controlling for individual fixed effects, whether fished in a given period, income and other important controls that might drive mental health independently of access. This would allow us to evaluate the relationship between variation in mental health and variations in access _by comparing an individual to themself over time_ rather than comparing individuals with each other as crossectional analysis would do. The addition of individual fixed effects in the model can effectively control for unobservable individual characteristics as long as they are time-invariant. 
+
+**Current analysis plan brainstorm**
+
+Time series approach: 
+Separately regress mental health on **reported access constraints**  for fishers and non-fishers, respectively (or combine them if it's not too dubious), along with a suite of controls. This can be a time series regression with individual fixed effects per the original dream, as long as we have multiple observations for each individual. This is a robust analytical approach in terms of controlling for unobserved individual characteristics, but will suffer from a lack of power and possible selection effects on time-varying characteristics(?) if regressions are completed separately for fishers vs. non-fishers. Reported access constraints are not a particularly theoretically grounded approach, but may be useful in tandem with some of the options below.
+
+Crossectional approach:
+Collapse data to create a crossectional dataset that will then (hopefully) contain values for the **R&P access index** across all households. This relies on a couple of things: (1) the assumption that every household fished (and therefore R&P access index variables were collected) in at least one of the three periods where the R&P access index data were collected and (2) that we can come up with a meaningful way of collapsing the data so that we do not lose valuable information and variation. 
+
+Using this collapsed dataset we can:
+
+- Regress mental health levels (average over time) on R&P access index to understand the role of access on mental health levels, if any.
+
+- Regress mental health variability (SD over time) on R&P access index to understand the role of access in fluctuations in mental health, if any.
+
+- Regress mental health variability on reported access constraints to understand the relationship between reported access constraints and fluctuations in mental health. (Mental health levels analog is more robustly done in time series analysis above).
+
