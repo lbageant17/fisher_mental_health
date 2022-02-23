@@ -12,6 +12,16 @@ Bring in fish access file
 
 ```{r}
 access <- read.csv(file.path(data, "tbl_I_FisheryAccess.csv"), na.strings=c("", "NA"))
+  # this does not contain all of the access variables that exist in the csv file (e.g. I4 questions). 
+
+# breaking access csv into three files for import
+accessp1 <- read.csv(file.path(data, "tbl_I_FisheryAccess_p1.csv"), na.strings=c("", "NA"))
+accessp2 <- read.csv(file.path(data, "tbl_I_FisheryAccess_p2.csv"), na.strings=c("", "NA"))
+accessp3 <- read.csv(file.path(data, "tbl_I_FisheryAccess_p3.csv"), na.strings=c("", "NA"))
+
+# combining three files by ParticipantID
+access <-   full_join(accessp1, accessp2, by = c("ParticipantID", "TimePoint"))
+
 
 # create a vector of fisher IDs. Access qx only asked of fishers, so pulling from there.
 fishers_only <- access %>% 
